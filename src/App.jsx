@@ -703,10 +703,22 @@ function Contact() {
   const submit = async () => {
     if (!ok) return; setStatus("sending");
     try {
-      const r1 = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, system: "Eres asistente de ventas de LA DIGITAL. Resumen breve del lead para Slack. Solo español. Max 4 líneas.", messages: [{ role: "user", content: `Lead: ${form.nombre}, ${form.email}, ${form.servicio}, ${form.mensaje || "Sin mensaje"}. Resumen Slack.` }] }) });
-      const d1 = await r1.json(); const sum = d1.content?.[0]?.text || ""; setAiSum(sum);
-      await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, messages: [{ role: "user", content: `Envía mensaje al canal ${SLACK_CHANNEL_ID}:\n\n🔔 *Nuevo lead — LA DIGITAL*\n*Nombre:* ${form.nombre}\n*Email:* ${form.email}\n*Servicio:* ${form.servicio}\n*Mensaje:* ${form.mensaje || "—"}\n---\n📊 *IA:* ${sum}` }], mcp_servers: [{ type: "url", url: "https://mcp.slack.com/mcp", name: "slack" }] }) });
-      setStatus("sent");
+      // Formspree — Crea tu formulario gratis en formspree.io y reemplaza el ID
+      // Paso 1: Ve a formspree.io, crea cuenta con info@la-digital.es
+      // Paso 2: Crea un formulario nuevo, te dará un ID tipo "xwpkvgyz"
+      // Paso 3: Reemplaza YOUR_FORM_ID abajo con ese ID
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: form.nombre,
+          email: form.email,
+          servicio: form.servicio,
+          mensaje: form.mensaje || "Sin mensaje",
+          _subject: `🔔 Nuevo lead LA DIGITAL — ${form.nombre} — ${form.servicio}`,
+        }),
+      });
+      if (res.ok) { setStatus("sent"); } else { setStatus("error"); }
     } catch { setStatus("error"); }
   };
   const inp = { fontFamily: "'DM Sans',system-ui,sans-serif", fontSize: 14.5, width: "100%", padding: "14px 16px", background: t.card, border: `1.5px solid ${t.border}`, borderRadius: 10, outline: "none", color: t.text, transition: "border-color .3s", boxSizing: "border-box" };
@@ -728,7 +740,6 @@ function Contact() {
             <div style={{ width: 44, height: 44, borderRadius: 44, background: t.accentLight, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", color: t.accent, fontSize: 20 }}>✓</div>
             <h3 style={{ fontSize: 22, fontWeight: 500, color: t.text, marginBottom: 8 }}>Mensaje enviado</h3>
             <p style={{ fontSize: 14.5, color: t.textMuted, lineHeight: 1.6 }}>Te contactamos en menos de 24h.</p>
-            {aiSum && <div style={{ marginTop: 16, padding: "12px 16px", background: t.bgAlt, borderRadius: 9, fontSize: 12.5, color: t.textMuted, textAlign: "left", lineHeight: 1.55 }}><strong style={{ color: t.text }}>Resumen IA:</strong><br />{aiSum}</div>}
           </div>
         </ScaleIn>
       ) : (
