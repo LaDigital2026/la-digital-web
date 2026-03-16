@@ -1,4 +1,4 @@
-// v5 - mobile popups, navbar spacing, hero margins
+// v6 - mobile popups, navbar spacing, hero margins
 import { useState, useEffect, useRef, useCallback, createContext, useContext } from "react";
 
 const SLACK_CHANNEL_ID = "C06LB0SMXPV";
@@ -18,7 +18,7 @@ const LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfUAAAB4CAYAAADrEWuj
 const defaultContent = {
   seo: {
     metaTitle: "LA DIGITAL | Agencia Shopify, Meta Ads, Google Ads e IA para eCommerce",
-    metaDescription: "Agencia eCommerce especializada en desarrollo Shopify, campañas en Meta Ads y Google Ads, e inteligencia artificial aplicada a tiendas online. Basque Country, España.",
+    metaDescription: "Agencia eCommerce especializada en desarrollo Shopify, campañas en Meta Ads y Google Ads e inteligencia artificial aplicada a tiendas online. Basque Country, España.",
     h1: "Agencia eCommerce Shopify, publicidad digital e inteligencia artificial para marcas que quieren escalar",
     h2Services: "Servicios de desarrollo Shopify, gestión de Meta Ads y Google Ads, y consultoría IA",
     h2Tech: "Plataformas y herramientas que dominamos",
@@ -26,7 +26,7 @@ const defaultContent = {
     h2Cases: "Casos de éxito reales con nuestros clientes eCommerce",
     h2Contact: "Solicita presupuesto para tu proyecto Shopify o eCommerce",
   },
-  hero: { tag: "Agencia Shopify · Meta Ads · Google Ads · IA", titleLight: "Desarrollo eCommerce en Shopify,", titleBold: "publicidad digital e IA", subtitle: "Agencia especializada en Shopify, campañas en Meta Ads y Google Ads, e inteligencia artificial aplicada a marcas que quieren escalar su negocio online." },
+  hero: { tag: "Agencia Shopify · Meta Ads · Google Ads · IA", titleLight: "Especialistas en Shopify", titleBold: "y publicidad digital ", subtitle: "Agencia especializada en Shopify, campañas en Meta Ads y Google Ads e inteligencia artificial aplicada a marcas que quieren escalar su negocio online." },
   services: [
     { icon: "◇", title: "Shopify Dev", sub: "Desarrollo & Migración", short: "Tiendas Shopify optimizadas para conversión. Diseño custom e integraciones.", tags: ["Desarrollo custom", "Migración", "Optimización"], detail: { title: "Desarrollo Shopify", body: "Creamos tiendas Shopify desde cero o migramos tu eCommerce actual con cero pérdida de SEO. Temas custom, integraciones de pago, logística y ERP.", bullets: ["Diseño y desarrollo custom de themes", "Migración desde cualquier plataforma", "Integraciones con ERP, CRM y logística", "Optimización de velocidad y conversión", "Soporte post-lanzamiento"] } },
     { icon: "◎", title: "PPC Manager", sub: "Meta Ads & Google Ads", short: "Gestión de campañas con foco en ROAS. Estrategia, creatividades y optimización.", tags: ["Meta Ads", "Google Ads", "ROAS"], detail: { title: "Publicidad Digital", body: "Campañas en Meta Ads y Google Ads con enfoque full-funnel. Desde awareness hasta retargeting.", bullets: ["Estrategia full-funnel personalizada", "Creatividades y copy optimizados", "A/B testing continuo", "Reportes semanales", "Optimización de ROAS y CAC"] } },
@@ -44,7 +44,7 @@ const defaultContent = {
     { brand: "Petite Marmotte", tag: "Shopify + Migración", metric: 0, metricPrefix: "", metricSuffix: "", metricLabel: "migración en curso", desc: "Marca de productos para bebés en algodón orgánico con 75K seguidores en Instagram. Migración de PrestaShop a Shopify, rediseño de experiencia de compra y estrategia de marketing digital.", period: "En curso", logoUrl: "" },
     { brand: "Tantä Rainwear", tag: "eCommerce + PPC", metric: 6.8, metricPrefix: "", metricSuffix: "x", metricLabel: "ROAS medio", desc: "Chubasqueros e impermeables premium nacidos en el País Vasco. Gestión de campañas en Meta Ads y Google Ads con un crecimiento de ventas anual del 70%.", period: "Proyecto continuo", logoUrl: "" },
   ],
-  contact: { tag: "Contacto", title: "Cuéntanos", titleBold: "tu proyecto", subtitle: "Nuestro equipo recibe tu mensaje al instante y te contactamos en menos de 24 horas." },
+  contact: { tag: "Contacto", title: "Cuéntanos", titleBold: "tu proyecto", subtitle: "Nuestro equipo recibe tu mensaje al instante y pronto recibirás respuesta." },
 };
 
 const ContentCtx = createContext();
@@ -136,7 +136,7 @@ function Fonts() {
   useEffect(() => {
     const l = document.createElement("link"); l.href = "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"; l.rel = "stylesheet"; document.head.appendChild(l);
     const s = document.createElement("style");
-    s.textContent = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{margin:0;background:#FFFFFF;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}::selection{background:${t.accent}20}@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}`;
+    s.textContent = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{margin:0;background:#FFFFFF;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}::selection{background:${t.accent}20}@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,textarea:-webkit-autofill,select:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #141413 inset!important;-webkit-text-fill-color:#fff!important;transition:background-color 5000s ease-in-out 0s;caret-color:#fff}input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}select option{background:#141413;color:#fff}`;
     document.head.appendChild(s);
     return () => { document.head.removeChild(l); document.head.removeChild(s); };
   }, []); return null;
@@ -161,9 +161,9 @@ function Navbar({ onContact, isMobile }) {
         <img src={LOGO} alt="LA DIGITAL" style={{ height: isMobile ? 30 : 40, objectFit: "contain" }} />
       </div>
       <button onClick={onContact} style={{
-        fontSize: isMobile ? 11 : 12.5, fontWeight: 500, letterSpacing: "0.02em",
+        fontSize: isMobile ? 12 : 14, fontWeight: 500, letterSpacing: "0.02em",
         color: "#fff", background: t.text, border: "none", borderRadius: 100,
-        padding: isMobile ? "7px 14px" : "8px 20px",
+        padding: isMobile ? "9px 18px" : "10px 26px",
         cursor: "pointer", transition: "all .3s ease", flexShrink: 0,
       }}
         onMouseEnter={e => e.currentTarget.style.background = t.accent}
@@ -661,9 +661,10 @@ function Cases({ isMobile }) {
 
       {/* Scrollable track */}
       <div ref={scrollRef} style={{
-        display: "flex", gap: 16, overflowX: "auto", scrollSnapType: "x mandatory",
+        display: "flex", gap: 16, overflowX: cases.length > 3 ? "auto" : "visible", scrollSnapType: "x mandatory",
         padding: `0 clamp(16px,5vw,72px) 8px`, scrollbarWidth: "none",
         WebkitOverflowScrolling: "touch",
+        justifyContent: cases.length <= 3 ? "center" : "flex-start",
       }}>
         <style>{`[data-cases-scroll]::-webkit-scrollbar{display:none}`}</style>
         {cases.map((c, i) => (
@@ -697,6 +698,7 @@ function Contact() {
   const { contact } = useContext(ContentCtx);
   const [form, setForm] = useState({ nombre: "", email: "", servicio: "", mensaje: "" });
   const [status, setStatus] = useState("idle");
+  const [focused, setFocused] = useState(null);
   const ch = e => setForm({ ...form, [e.target.name]: e.target.value });
   const ok = form.nombre && form.email && form.servicio;
   const submit = async () => {
@@ -711,63 +713,207 @@ function Contact() {
       setStatus("sent");
     } catch { setStatus("error"); }
   };
-  const inp = { fontFamily: "'DM Sans',system-ui,sans-serif", fontSize: 14.5, width: "100%", padding: "14px 16px", background: t.card, border: `1.5px solid ${t.border}`, borderRadius: 10, outline: "none", color: t.text, transition: "border-color .3s", boxSizing: "border-box" };
+
+  const rowStyle = (name) => ({
+    borderBottom: `1px solid ${focused === name ? t.accent : "rgba(255,255,255,0.12)"}`,
+    padding: "16px 0 12px",
+    transition: "border-color .3s ease",
+  });
+
+  const inputBase = {
+    fontFamily: "'DM Sans',system-ui,sans-serif",
+    fontSize: 16, fontWeight: 400,
+    width: "100%", padding: 0,
+    background: "transparent",
+    border: "none", outline: "none",
+    color: "#fff", boxSizing: "border-box",
+  };
+
+  // Hexagon helper — generates points for a hex at cx,cy with size s
+  const hexPoints = (cx, cy, s) => [0,1,2,3,4,5].map(i => {
+    const a = Math.PI / 180 * (60 * i - 30);
+    return `${cx + s * Math.cos(a)},${cy + s * Math.sin(a)}`;
+  }).join(" ");
 
   return (
-    <section id="contacto" style={{ padding: "72px clamp(16px,5vw,72px)", maxWidth: 540, margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: 40 }}>
-        <FadeUp><span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 12 }}>{contact.tag}</span></FadeUp>
-        <div>
-          <WordReveal text={contact.title} delay={0} fontSize="clamp(26px,4.2vw,40px)" />
-          {" "}
-          <WordReveal text={contact.titleBold} bold delay={0.15} fontSize="clamp(26px,4.2vw,40px)" />
-        </div>
-        <FadeUp delay={0.3}><p style={{ fontSize: 14.5, color: t.textMuted, lineHeight: 1.6, marginTop: 12 }}>{contact.subtitle}</p></FadeUp>
+    <section id="contacto" style={{ position: "relative", overflow: "hidden", padding: "100px clamp(16px,5vw,72px)", background: t.dark }}>
+      {/* Multi-size hexagonal pattern */}
+      <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 900">
+          {/* Small hex grid — base layer */}
+          {Array.from({ length: 12 }).map((_, row) =>
+            Array.from({ length: 14 }).map((_, col) => {
+              const x = col * 95 + (row % 2 ? 47 : 0);
+              const y = row * 82;
+              return <polygon key={`s${row}-${col}`} points={hexPoints(x, y, 22)} fill="none" stroke="#5A9A6E" strokeWidth="0.5" opacity="0.1" />;
+            })
+          )}
+          {/* Medium hexagons — scattered */}
+          {[[150,150,45],[500,100,50],[900,200,40],[300,400,55],[750,350,48],[100,600,42],[600,550,52],[950,650,46],[400,750,40],[200,850,48]].map(([x,y,s],i) => (
+            <polygon key={`m${i}`} points={hexPoints(x,y,s)} fill="none" stroke="#5A9A6E" strokeWidth="1" opacity="0.18" />
+          ))}
+          {/* Large hexagons — statement pieces */}
+          {[[350,250,90],[850,450,100],[150,700,85],[700,150,75],[550,600,95]].map(([x,y,s],i) => (
+            <polygon key={`l${i}`} points={hexPoints(x,y,s)} fill="none" stroke="#5A9A6E" strokeWidth="1.2" opacity="0.14" />
+          ))}
+          {/* Extra large accent hexagons */}
+          <polygon points={hexPoints(600,400,160)} fill="none" stroke="#5A9A6E" strokeWidth="1.5" opacity="0.1" />
+          <polygon points={hexPoints(200,300,130)} fill="none" stroke="#5A9A6E" strokeWidth="1.2" opacity="0.08" />
+          <polygon points={hexPoints(900,700,140)} fill="none" stroke="#5A9A6E" strokeWidth="1.2" opacity="0.08" />
+          {/* Dot accents at hex centers */}
+          {[[150,150],[500,100],[750,350],[600,550],[350,250],[850,450],[300,400],[950,650]].map(([x,y],i) => (
+            <circle key={`d${i}`} cx={x} cy={y} r="3" fill="#5A9A6E" opacity="0.25" />
+          ))}
+        </svg>
       </div>
-      {status === "sent" ? (
-        <ScaleIn>
-          <div style={{ textAlign: "center", padding: 36, background: t.card, borderRadius: 16, border: `1px solid ${t.accent}22` }}>
-            <div style={{ width: 44, height: 44, borderRadius: 44, background: t.accentLight, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", color: t.accent, fontSize: 20 }}>✓</div>
-            <h3 style={{ fontSize: 22, fontWeight: 500, color: t.text, marginBottom: 8 }}>Mensaje enviado</h3>
-            <p style={{ fontSize: 14.5, color: t.textMuted, lineHeight: 1.6 }}>Te contactamos en menos de 24h.</p>
+
+      <div style={{ maxWidth: 480, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 52 }}>
+          <FadeUp><span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 12 }}>{contact.tag}</span></FadeUp>
+          <div>
+            <WordReveal text={contact.title} delay={0} fontSize="clamp(26px,4.2vw,40px)" color="#fff" />
+            {" "}
+            <WordReveal text={contact.titleBold} bold delay={0.15} fontSize="clamp(26px,4.2vw,40px)" color="#fff" />
           </div>
-        </ScaleIn>
-      ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {[
-            <input key="n" name="nombre" placeholder="Tu nombre" value={form.nombre} onChange={ch} style={inp} onFocus={e => e.target.style.borderColor = t.accent} onBlur={e => e.target.style.borderColor = t.border} />,
-            <input key="e" name="email" type="email" placeholder="tu@email.com" value={form.email} onChange={ch} style={inp} onFocus={e => e.target.style.borderColor = t.accent} onBlur={e => e.target.style.borderColor = t.border} />,
-            <select key="s" name="servicio" value={form.servicio} onChange={ch} style={{ ...inp, appearance: "none", color: form.servicio ? t.text : t.textMuted, cursor: "pointer" }} onFocus={e => e.target.style.borderColor = t.accent} onBlur={e => e.target.style.borderColor = t.border}>
-              <option value="" disabled>¿Qué servicio te interesa?</option>
-              <option>Shopify Dev</option><option>PPC Manager</option><option>AI Grow</option><option>Consultoría eCommerce</option><option>Varios servicios</option>
-            </select>,
-            <textarea key="m" name="mensaje" placeholder="Cuéntanos tu proyecto... (opcional)" value={form.mensaje} onChange={ch} rows={3} style={{ ...inp, resize: "vertical", minHeight: 80 }} onFocus={e => e.target.style.borderColor = t.accent} onBlur={e => e.target.style.borderColor = t.border} />,
-          ].map((el, i) => <SlideRight key={i} delay={0.35 + i * 0.08}>{el}</SlideRight>)}
-          <FadeUp delay={0.7}>
-            <button onClick={submit} disabled={status === "sending" || !ok} style={{ fontSize: 14.5, fontWeight: 500, color: "#fff", background: (status === "sending" || !ok) ? t.textMuted : t.accent, border: "none", borderRadius: 10, padding: 15, cursor: (status === "sending" || !ok) ? "not-allowed" : "pointer", transition: "all .3s ease", marginTop: 4, width: "100%" }}
-              onMouseEnter={e => { if (ok && status !== "sending") e.currentTarget.style.background = t.accentHover; }}
-              onMouseLeave={e => { if (ok && status !== "sending") e.currentTarget.style.background = t.accent; }}>
-              {status === "sending" ? "Enviando..." : "Enviar mensaje"}
-            </button>
-          </FadeUp>
-          {status === "error" && <p style={{ fontSize: 13, color: "#c44", textAlign: "center" }}>Error. Inténtalo de nuevo.</p>}
+          <FadeUp delay={0.3}><p style={{ fontSize: 14.5, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginTop: 12 }}>{contact.subtitle}</p></FadeUp>
         </div>
-      )}
+
+        {status === "sent" ? (
+          <ScaleIn>
+            <div style={{ textAlign: "center", padding: 44 }}>
+              <div style={{ width: 52, height: 52, borderRadius: 52, background: "rgba(90,154,110,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", color: t.accent, fontSize: 22 }}>✓</div>
+              <h3 style={{ fontSize: 22, fontWeight: 500, color: "#fff", marginBottom: 8 }}>Mensaje enviado</h3>
+              <p style={{ fontSize: 14.5, color: "rgba(255,255,255,0.45)", lineHeight: 1.6 }}>Te contactamos en menos de 24h.</p>
+            </div>
+          </ScaleIn>
+        ) : (
+          <div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+              <FadeUp delay={0.35}>
+                <div style={rowStyle("nombre")}>
+                  <label style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: 6 }}>Nombre</label>
+                  <input name="nombre" placeholder="Tu nombre" value={form.nombre} onChange={ch}
+                    onFocus={() => setFocused("nombre")} onBlur={() => setFocused(null)}
+                    style={inputBase} />
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.43}>
+                <div style={rowStyle("email")}>
+                  <label style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: 6 }}>Email</label>
+                  <input name="email" type="email" placeholder="tu@email.com" value={form.email} onChange={ch}
+                    onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
+                    style={inputBase} />
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.51}>
+                <div style={rowStyle("servicio")}>
+                  <label style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: 6 }}>Servicio</label>
+                  <select name="servicio" value={form.servicio} onChange={ch}
+                    onFocus={() => setFocused("servicio")} onBlur={() => setFocused(null)}
+                    style={{ ...inputBase, appearance: "none", color: form.servicio ? "#fff" : "rgba(255,255,255,0.25)", cursor: "pointer" }}>
+                    <option value="" disabled>¿Qué servicio te interesa?</option>
+                    <option>Shopify Dev</option><option>PPC Manager</option><option>AI Grow</option><option>Consultoría eCommerce</option><option>Varios servicios</option>
+                  </select>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.59}>
+                <div style={rowStyle("mensaje")}>
+                  <label style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: 6 }}>Mensaje</label>
+                  <textarea name="mensaje" placeholder="Cuéntanos tu proyecto... (opcional)" value={form.mensaje} onChange={ch} rows={3}
+                    onFocus={() => setFocused("mensaje")} onBlur={() => setFocused(null)}
+                    style={{ ...inputBase, resize: "vertical", minHeight: 60 }} />
+                </div>
+              </FadeUp>
+            </div>
+
+            <FadeUp delay={0.67}>
+              <button onClick={submit} disabled={status === "sending" || !ok} style={{
+                fontSize: 15, fontWeight: 500, color: "#fff",
+                background: (status === "sending" || !ok) ? "rgba(255,255,255,0.08)" : t.accent,
+                border: "none", borderRadius: 12, padding: "16px",
+                cursor: (status === "sending" || !ok) ? "not-allowed" : "pointer",
+                transition: "all .3s ease", marginTop: 32, width: "100%",
+                boxShadow: ok && status !== "sending" ? "0 4px 24px rgba(90,154,110,0.3)" : "none",
+              }}
+                onMouseEnter={e => { if (ok && status !== "sending") { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-1px)"; } }}
+                onMouseLeave={e => { if (ok && status !== "sending") { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "translateY(0)"; } }}>
+                {status === "sending" ? "Enviando..." : "Enviar mensaje"}
+              </button>
+            </FadeUp>
+            {status === "error" && <p style={{ fontSize: 13, color: "#e55", textAlign: "center", marginTop: 12 }}>Error. Inténtalo de nuevo.</p>}
+          </div>
+        )}
+      </div>
     </section>
   );
 }
 
+/* ═══ LEGAL MODAL ═══ */
+function LegalModal({ title, children, onClose }) {
+  useEffect(() => { document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = ""; }; }, []);
+  return (
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.4)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+      <div onClick={e => e.stopPropagation()} style={{ background: t.card, borderRadius: 20, width: "100%", maxWidth: 640, maxHeight: "85vh", overflow: "hidden", boxShadow: "0 32px 80px rgba(0,0,0,0.15)", position: "relative", animation: "fadeUp .3s ease" }}>
+        <div style={{ padding: "24px 28px 16px", borderBottom: `1px solid ${t.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, color: t.text, margin: 0 }}>{title}</h2>
+          <button onClick={onClose} style={{ background: t.bgAlt, border: "none", borderRadius: 100, width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 14, color: t.textMuted }}>✕</button>
+        </div>
+        <div style={{ padding: "20px 28px 28px", overflowY: "auto", maxHeight: "calc(85vh - 70px)", fontSize: 13.5, lineHeight: 1.7, color: t.textMuted }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const PrivacyContent = () => (
+  <div>
+    <p><strong style={{ color: t.text }}>Responsable del tratamiento</strong><br />LA DIGITAL · Donostia / San Sebastián, País Vasco, España<br />Email: info@la-digital.es</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Datos que recopilamos</strong><br />A través del formulario de contacto recopilamos: nombre, email, servicio de interés y mensaje. Estos datos se utilizan exclusivamente para responder a tu consulta y ofrecerte información sobre nuestros servicios.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Base legal</strong><br />El tratamiento de tus datos se basa en tu consentimiento al enviar el formulario de contacto. Puedes retirar tu consentimiento en cualquier momento enviando un email a info@la-digital.es.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Destinatarios</strong><br />Tus datos no serán cedidos a terceros salvo obligación legal. Utilizamos Resend como proveedor de email transaccional para procesar los envíos del formulario.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Conservación</strong><br />Los datos se conservarán mientras exista interés mutuo y durante los plazos legales aplicables.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Tus derechos</strong><br />Puedes ejercer tus derechos de acceso, rectificación, supresión, portabilidad y oposición enviando un email a info@la-digital.es. También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).</p>
+  </div>
+);
+
+const CookiesContent = () => (
+  <div>
+    <p><strong style={{ color: t.text }}>¿Qué son las cookies?</strong><br />Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Sirven para que el sitio funcione correctamente y para recopilar información sobre la navegación.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Cookies que utilizamos</strong><br />Esta web utiliza únicamente cookies técnicas necesarias para el funcionamiento del sitio. No utilizamos cookies de marketing, analíticas ni de terceros que rastreen tu actividad.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Cookies técnicas</strong><br />Son estrictamente necesarias para la navegación y el uso de las funcionalidades básicas del sitio. No requieren consentimiento.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>¿Cómo desactivar las cookies?</strong><br />Puedes configurar tu navegador para bloquear o eliminar las cookies. Ten en cuenta que esto puede afectar al funcionamiento de algunos elementos de la web.</p>
+    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Más información</strong><br />Para cualquier consulta sobre nuestra política de cookies, contacta con nosotros en info@la-digital.es.</p>
+  </div>
+);
+
 /* ═══ FOOTER ═══ */
 function Footer() {
+  const [legal, setLegal] = useState(null);
+  const linkStyle = { fontSize: 12, color: t.textMuted, cursor: "pointer", background: "none", border: "none", fontFamily: "inherit", textDecoration: "underline", textUnderlineOffset: 2, transition: "color .2s" };
   return (
-    <FadeUp>
-      <footer style={{ padding: "36px clamp(16px,5vw,72px)", borderTop: `1px solid ${t.border}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={LOGO} alt="LA DIGITAL" style={{ height: 30, objectFit: "contain" }} />
-        </div>
-        <span style={{ fontSize: 12, color: t.textMuted }}>© {new Date().getFullYear()} LA DIGITAL · Basque Country</span>
-      </footer>
-    </FadeUp>
+    <>
+      <FadeUp>
+        <footer style={{ padding: "36px clamp(16px,5vw,72px)", borderTop: `1px solid ${t.border}` }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img src={LOGO} alt="LA DIGITAL" style={{ height: 30, objectFit: "contain" }} />
+            </div>
+            <span style={{ fontSize: 12, color: t.textMuted }}>© {new Date().getFullYear()} LA DIGITAL · Basque Country</span>
+          </div>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 16 }}>
+            <button onClick={() => setLegal("privacy")} style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = t.accent} onMouseLeave={e => e.currentTarget.style.color = t.textMuted}>Política de Privacidad</button>
+            <button onClick={() => setLegal("cookies")} style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = t.accent} onMouseLeave={e => e.currentTarget.style.color = t.textMuted}>Política de Cookies</button>
+          </div>
+        </footer>
+      </FadeUp>
+      {legal === "privacy" && <LegalModal title="Política de Privacidad" onClose={() => setLegal(null)}><PrivacyContent /></LegalModal>}
+      {legal === "cookies" && <LegalModal title="Política de Cookies" onClose={() => setLegal(null)}><CookiesContent /></LegalModal>}
+    </>
   );
 }
 
@@ -784,6 +930,7 @@ function EditField({ label, value, onChange, multiline = false }) {
 
 function AdminPanel({ content, setContent, onClose }) {
   const [tab, setTab] = useState("seo");
+  const [showExport, setShowExport] = useState(false);
   const tabs = [{ id: "seo", label: "SEO" }, { id: "hero", label: "Hero" }, { id: "services", label: "Servicios" }, { id: "steps", label: "Proceso" }, { id: "cases", label: "Casos" }, { id: "contact", label: "Contacto" }];
   const updateHero = (k, v) => setContent(p => ({ ...p, hero: { ...p.hero, [k]: v } }));
   const updateSeo = (k, v) => setContent(p => ({ ...p, seo: { ...p.seo, [k]: v } }));
@@ -791,6 +938,7 @@ function AdminPanel({ content, setContent, onClose }) {
   const updateCase = (i, k, v) => setContent(p => { const c = [...p.cases]; c[i] = { ...c[i], [k]: v }; return { ...p, cases: c }; });
   const updateStep = (i, k, v) => setContent(p => { const s = [...p.steps]; s[i] = { ...s[i], [k]: v }; return { ...p, steps: s }; });
   const updateService = (i, k, v) => setContent(p => { const s = [...p.services]; s[i] = { ...s[i], [k]: v }; return { ...p, services: s }; });
+  const exportRef = useRef(null);
   return (
     <div style={{ position: "fixed", top: 0, right: 0, bottom: 0, width: 330, background: "#fff", zIndex: 300, boxShadow: "-4px 0 24px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column" }}>
       <div style={{ padding: "14px 14px 10px", borderBottom: `1px solid ${t.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -868,9 +1016,26 @@ function AdminPanel({ content, setContent, onClose }) {
           <EditField label="Subtítulo" value={content.contact.subtitle} onChange={v => updateContact("subtitle", v)} multiline />
         </>}
       </div>
-      <div style={{ padding: "10px 14px", borderTop: `1px solid ${t.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontSize: 11, color: t.accent }}>✓ Cambios guardados</span>
-        <button onClick={() => { if (confirm("¿Resetear todos los textos a los valores originales?")) { setContent(defaultContent); } }} style={{ fontSize: 11, color: t.textMuted, background: "none", border: `1px solid ${t.border}`, borderRadius: 6, padding: "4px 10px", cursor: "pointer" }}>Reset</button>
+      <div style={{ padding: "10px 14px", borderTop: `1px solid ${t.border}`, display: "flex", flexDirection: "column", gap: 8 }}>
+        {showExport && (
+          <div style={{ position: "relative" }}>
+            <p style={{ fontSize: 10, color: t.accent, marginBottom: 4, fontWeight: 600 }}>SELECCIONA TODO → COPIA → PEGA EN CLAUDE</p>
+            <textarea ref={exportRef} readOnly value={JSON.stringify(content, null, 2)} onClick={e => e.target.select()} style={{ width: "100%", height: 150, fontSize: 10, fontFamily: "monospace", background: "#141413", color: "#5A9A6E", border: `1px solid ${t.border}`, borderRadius: 6, padding: 8, resize: "none", boxSizing: "border-box" }} />
+          </div>
+        )}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6 }}>
+          <button onClick={() => { if (confirm("¿Resetear todos los textos a los valores originales?")) { setContent(defaultContent); } }} style={{ fontSize: 11, color: t.textMuted, background: "none", border: `1px solid ${t.border}`, borderRadius: 6, padding: "4px 10px", cursor: "pointer" }}>Reset</button>
+          <div style={{ display: "flex", gap: 6 }}>
+            <button onClick={async () => {
+              try {
+                await window.storage.set("la-digital-content", JSON.stringify(content));
+                const btn = document.getElementById("saveBtn");
+                if (btn) { btn.textContent = "✓ Guardado"; btn.style.background = t.accent; setTimeout(() => { btn.textContent = "💾 Guardar"; btn.style.background = t.text; }, 2000); }
+              } catch(e) { alert("Error al guardar"); }
+            }} id="saveBtn" style={{ fontSize: 11, fontWeight: 600, color: "#fff", background: t.text, border: "none", borderRadius: 8, padding: "7px 14px", cursor: "pointer", transition: "all .3s" }}>💾 Guardar</button>
+            <button onClick={() => { setShowExport(s => !s); setTimeout(() => { if (exportRef.current) exportRef.current.select(); }, 100); }} style={{ fontSize: 11, fontWeight: 600, color: "#fff", background: showExport ? t.accent : "#4A6FA5", border: "none", borderRadius: 8, padding: "7px 14px", cursor: "pointer", transition: "all .3s" }}>{showExport ? "✕ Cerrar" : "📋 Exportar"}</button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -899,21 +1064,27 @@ export default function LaDigital() {
   const [loaded, setLoaded] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Admin login: go to ladigital.es?admin → prompts for password
+  // Admin mode: always on in artifact/localhost, password-protected in production
   useEffect(() => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      if (params.has("admin") && !isAdmin) {
-        const pw = prompt("Contraseña de administrador:");
-        if (pw === "ladigital2026") {
-          setIsAdmin(true);
-        } else if (pw !== null) {
-          alert("Contraseña incorrecta");
-          // Remove ?admin from URL without reload
-          window.history.replaceState({}, "", window.location.pathname);
+      const host = window.location.hostname;
+      const isProduction = host.includes("ladigital") || host.includes("vercel");
+      if (isProduction) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has("admin") && !isAdmin) {
+          const pw = prompt("Contraseña de administrador:");
+          if (pw === "ladigital2026") {
+            setIsAdmin(true);
+          } else if (pw !== null) {
+            alert("Contraseña incorrecta");
+            window.history.replaceState({}, "", window.location.pathname);
+          }
         }
+      } else {
+        // Not in production (artifact, localhost, etc.) → always show editor
+        setIsAdmin(true);
       }
-    } catch {}
+    } catch { setIsAdmin(true); }
   }, []);
 
   // Load saved content on mount
