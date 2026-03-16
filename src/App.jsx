@@ -697,28 +697,18 @@ function Contact() {
   const { contact } = useContext(ContentCtx);
   const [form, setForm] = useState({ nombre: "", email: "", servicio: "", mensaje: "" });
   const [status, setStatus] = useState("idle");
-  const [aiSum, setAiSum] = useState("");
   const ch = e => setForm({ ...form, [e.target.name]: e.target.value });
   const ok = form.nombre && form.email && form.servicio;
   const submit = async () => {
     if (!ok) return; setStatus("sending");
     try {
-      // Formspree — Crea tu formulario gratis en formspree.io y reemplaza el ID
-      // Paso 1: Ve a formspree.io, crea cuenta con info@la-digital.es
-      // Paso 2: Crea un formulario nuevo, te dará un ID tipo "xwpkvgyz"
-      // Paso 3: Reemplaza YOUR_FORM_ID abajo con ese ID
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombre: form.nombre,
-          email: form.email,
-          servicio: form.servicio,
-          mensaje: form.mensaje || "Sin mensaje",
-          _subject: `🔔 Nuevo lead LA DIGITAL — ${form.nombre} — ${form.servicio}`,
-        }),
+        body: JSON.stringify(form),
       });
-      if (res.ok) { setStatus("sent"); } else { setStatus("error"); }
+      if (!res.ok) throw new Error("Error");
+      setStatus("sent");
     } catch { setStatus("error"); }
   };
   const inp = { fontFamily: "'DM Sans',system-ui,sans-serif", fontSize: 14.5, width: "100%", padding: "14px 16px", background: t.card, border: `1.5px solid ${t.border}`, borderRadius: 10, outline: "none", color: t.text, transition: "border-color .3s", boxSizing: "border-box" };
