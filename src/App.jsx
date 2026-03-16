@@ -44,7 +44,7 @@ const defaultContent = {
     { brand: "Petite Marmotte", tag: "Shopify + Migración", metric: 0, metricPrefix: "", metricSuffix: "", metricLabel: "migración en curso", desc: "Marca de productos para bebés en algodón orgánico con 75K seguidores en Instagram. Migración de PrestaShop a Shopify, rediseño de experiencia de compra y estrategia de marketing digital.", period: "En curso", logoUrl: "" },
     { brand: "Tantä Rainwear", tag: "eCommerce + PPC", metric: 6.8, metricPrefix: "", metricSuffix: "x", metricLabel: "ROAS medio", desc: "Chubasqueros e impermeables premium nacidos en el País Vasco. Gestión de campañas en Meta Ads y Google Ads con un crecimiento de ventas anual del 70%.", period: "Proyecto continuo", logoUrl: "" },
   ],
-  contact: { tag: "Contacto", title: "Cuéntanos", titleBold: "tu proyecto", subtitle: "Nuestro equipo recibe tu mensaje al instante y la IA nos ayuda a preparar la mejor propuesta." },
+  contact: { tag: "Contacto", title: "Cuéntanos", titleBold: "tu proyecto", subtitle: "Nuestro equipo recibe tu mensaje al instante y te contactamos en menos de 24 horas." },
 };
 
 const ContentCtx = createContext();
@@ -898,6 +898,14 @@ export default function LaDigital() {
   const [editOpen, setEditOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
+  // Check if admin mode via URL param ?admin=ladigital2026
+  const isAdmin = (() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("admin") === "ladigital2026";
+    } catch { return false; }
+  })();
+
   // Load saved content on mount
   useEffect(() => {
     async function load() {
@@ -905,7 +913,6 @@ export default function LaDigital() {
         const result = await window.storage.get(STORAGE_KEY);
         if (result && result.value) {
           const saved = JSON.parse(result.value);
-          // Deep merge saved over defaults so new fields are preserved
           setContent(prev => {
             const merged = { ...prev };
             for (const key of Object.keys(saved)) {
@@ -940,15 +947,15 @@ export default function LaDigital() {
   }, [content, loaded]);
 
   const go = () => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
-  const viewWidth = view === "mobile" ? 375 : view === "tablet" ? 768 : "100%";
-  const isMobile = view === "mobile";
-  const isMobileOrTablet = view !== "desktop";
+  const viewWidth = isAdmin ? (view === "mobile" ? 375 : view === "tablet" ? 768 : "100%") : "100%";
+  const isMobile = isAdmin ? view === "mobile" : false;
+  const isMobileOrTablet = isAdmin ? view !== "desktop" : false;
 
   return (
     <ContentCtx.Provider value={content}>
-      <div style={{ background: "#E0E0DC", minHeight: "100vh", paddingBottom: 72 }}>
+      <div style={{ background: isAdmin ? "#E0E0DC" : t.bg, minHeight: "100vh", paddingBottom: isAdmin ? 72 : 0 }}>
         <Fonts />
-        <div style={{ width: viewWidth, maxWidth: "100%", margin: view === "desktop" ? "0" : "0 auto", background: t.bg, minHeight: "100vh", boxShadow: view !== "desktop" ? "0 0 40px rgba(0,0,0,0.1)" : "none", transition: "width .4s cubic-bezier(.16,1,.3,1)", position: "relative", overflow: "visible" }}>
+        <div style={{ width: viewWidth, maxWidth: "100%", margin: isAdmin && view !== "desktop" ? "0 auto" : "0", background: t.bg, minHeight: "100vh", boxShadow: isAdmin && view !== "desktop" ? "0 0 40px rgba(0,0,0,0.1)" : "none", transition: "width .4s cubic-bezier(.16,1,.3,1)", position: "relative", overflow: "visible" }}>
           <Navbar onContact={go} isMobile={isMobile} />
           <Hero onContact={go} isMobile={isMobile} />
           <Services isMobile={isMobileOrTablet} />
@@ -958,8 +965,8 @@ export default function LaDigital() {
           <Contact />
           <Footer />
         </div>
-        <Toolbar view={view} setView={setView} editOpen={editOpen} setEditOpen={setEditOpen} />
-        {editOpen && <AdminPanel content={content} setContent={setContent} onClose={() => setEditOpen(false)} />}
+        {isAdmin && <Toolbar view={view} setView={setView} editOpen={editOpen} setEditOpen={setEditOpen} />}
+        {isAdmin && editOpen && <AdminPanel content={content} setContent={setContent} onClose={() => setEditOpen(false)} />}
       </div>
     </ContentCtx.Provider>
   );
