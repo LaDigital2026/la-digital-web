@@ -897,14 +897,24 @@ export default function LaDigital() {
   const [view, setView] = useState("desktop");
   const [editOpen, setEditOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check if admin mode via URL param ?admin=ladigital2026
-  const isAdmin = (() => {
+  // Admin login: go to ladigital.es?admin → prompts for password
+  useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get("admin") === "ladigital2026";
-    } catch { return false; }
-  })();
+      if (params.has("admin") && !isAdmin) {
+        const pw = prompt("Contraseña de administrador:");
+        if (pw === "ladigital2026") {
+          setIsAdmin(true);
+        } else if (pw !== null) {
+          alert("Contraseña incorrecta");
+          // Remove ?admin from URL without reload
+          window.history.replaceState({}, "", window.location.pathname);
+        }
+      }
+    } catch {}
+  }, []);
 
   // Load saved content on mount
   useEffect(() => {
