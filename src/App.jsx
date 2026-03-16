@@ -134,9 +134,16 @@ function ArrowR({ s = 14, c = "currentColor" }) { return <svg width={s} height={
 /* ═══ FONTS ═══ */
 function Fonts() {
   useEffect(() => {
+    // Ensure viewport meta exists
+    if (!document.querySelector('meta[name="viewport"]')) {
+      const vp = document.createElement("meta");
+      vp.name = "viewport";
+      vp.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+      document.head.appendChild(vp);
+    }
     const l = document.createElement("link"); l.href = "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"; l.rel = "stylesheet"; document.head.appendChild(l);
     const s = document.createElement("style");
-    s.textContent = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{margin:0;background:#FFFFFF;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}::selection{background:${t.accent}20}@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,textarea:-webkit-autofill,select:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #141413 inset!important;-webkit-text-fill-color:#fff!important;transition:background-color 5000s ease-in-out 0s;caret-color:#fff}input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}select option{background:#141413;color:#fff}`;
+    s.textContent = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{margin:0;background:#FFFFFF;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}::selection{background:${t.accent}20}@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,textarea:-webkit-autofill,select:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #141413 inset!important;-webkit-text-fill-color:#fff!important;transition:background-color 5000s ease-in-out 0s;caret-color:#fff}input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}select option{background:#141413;color:#fff}.svc-scroll::-webkit-scrollbar{display:none}[data-cases-scroll]::-webkit-scrollbar{display:none}`;
     document.head.appendChild(s);
     return () => { document.head.removeChild(l); document.head.removeChild(s); };
   }, []); return null;
@@ -149,21 +156,21 @@ function Navbar({ onContact, isMobile }) {
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 100,
-      height: isMobile ? 50 : 64,
+      height: "clamp(50px, 8vw, 64px)",
       display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: isMobile ? "0 12px" : "0 clamp(20px,5vw,72px)",
+      padding: "0 clamp(14px, 4vw, 72px)",
       background: sc ? "rgba(255,255,255,0.88)" : t.bg,
       backdropFilter: sc ? "blur(24px) saturate(180%)" : "none",
       borderBottom: sc ? `1px solid ${t.border}` : "1px solid transparent",
       transition: "all .4s ease",
     }}>
       <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} style={{ cursor: "pointer", display: "flex", alignItems: "center" }}>
-        <img src={LOGO} alt="LA DIGITAL" style={{ height: isMobile ? 30 : 40, objectFit: "contain" }} />
+        <img src={LOGO} alt="LA DIGITAL" style={{ height: "clamp(24px, 5vw, 40px)", objectFit: "contain" }} />
       </div>
       <button onClick={onContact} style={{
-        fontSize: isMobile ? 12 : 14, fontWeight: 500, letterSpacing: "0.02em",
+        fontSize: "clamp(11px, 2vw, 14px)", fontWeight: 500, letterSpacing: "0.02em",
         color: "#fff", background: t.text, border: "none", borderRadius: 100,
-        padding: isMobile ? "9px 18px" : "10px 26px",
+        padding: "clamp(7px,1.5vw,10px) clamp(14px,3vw,26px)",
         cursor: "pointer", transition: "all .3s ease", flexShrink: 0,
       }}
         onMouseEnter={e => e.currentTarget.style.background = t.accent}
@@ -179,9 +186,9 @@ function Hero({ onContact, isMobile }) {
   const { hero, seo } = useContext(ContentCtx);
   useEffect(() => { setTimeout(() => setLd(true), 100); }, []);
   const a = d => ({ opacity: ld ? 1 : 0, transform: ld ? "translateY(0)" : "translateY(24px)", transition: `all 1s cubic-bezier(.16,1,.3,1) ${d}s` });
-  const heroFontSize = isMobile ? 36 : 78;
+  const heroFontSize = "clamp(30px, 8vw, 78px)";
   return (
-    <section style={{ minHeight: isMobile ? "75svh" : "85svh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: isMobile ? "60px 20px 40px" : "80px 72px 48px", position: "relative", overflow: "hidden" }}>
+    <section style={{ minHeight: "80svh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "clamp(40px,10vw,80px) clamp(20px,5vw,72px) clamp(30px,5vw,48px)", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", width: 420, height: 420, borderRadius: "50%", background: `radial-gradient(circle,${t.accent}06 0%,transparent 70%)`, top: "5%", right: "-10%", pointerEvents: "none" }} />
       <div style={a(0.1)}><span style={{ fontSize: isMobile ? 9 : 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: t.accent }}>{hero.tag}</span></div>
 
@@ -219,15 +226,15 @@ function Hero({ onContact, isMobile }) {
       {/* Semantic H1 for SEO — visually hidden */}
       <h1 style={{ width: 0, height: 0, overflow: "hidden", opacity: 0, position: "absolute", pointerEvents: "none" }}>{seo.h1}</h1>
 
-      <p style={{ ...a(0.8), fontSize: isMobile ? 13 : 18, fontWeight: 400, lineHeight: 1.65, color: t.textMuted, maxWidth: 460, marginTop: isMobile ? 16 : 24, padding: isMobile ? "0 4px" : 0 }}>{hero.subtitle}</p>
+      <p style={{ ...a(0.8), fontSize: "clamp(13px, 2vw, 18px)", fontWeight: 400, lineHeight: 1.65, color: t.textMuted, maxWidth: 460, marginTop: "clamp(12px, 3vw, 24px)", padding: "0 4px" }}>{hero.subtitle}</p>
 
-      <div style={{ ...a(0.95), display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginTop: isMobile ? 24 : 36 }}>
-        <button onClick={onContact} style={{ fontSize: isMobile ? 13 : 14, fontWeight: 500, color: "#fff", background: t.accent, border: "none", borderRadius: 100, padding: isMobile ? "11px 24px" : "13px 32px", cursor: "pointer", transition: "all .3s ease", display: "flex", alignItems: "center", gap: 7 }}
+      <div style={{ ...a(0.95), display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginTop: "clamp(20px, 4vw, 36px)" }}>
+        <button onClick={onContact} style={{ fontSize: "clamp(13px, 2vw, 14px)", fontWeight: 500, color: "#fff", background: t.accent, border: "none", borderRadius: 100, padding: "clamp(10px,2vw,13px) clamp(20px,4vw,32px)", cursor: "pointer", transition: "all .3s ease", display: "flex", alignItems: "center", gap: 7 }}
           onMouseEnter={e => { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${t.accent}28`; }}
           onMouseLeave={e => { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
           Empezar proyecto <ArrowR s={14} c="#fff" />
         </button>
-        <button onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: isMobile ? 13 : 14, fontWeight: 500, color: t.text, background: "transparent", border: `1.5px solid ${t.border}`, borderRadius: 100, padding: isMobile ? "11px 24px" : "13px 32px", cursor: "pointer", transition: "all .3s ease" }}
+        <button onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })} style={{ fontSize: "clamp(13px, 2vw, 14px)", fontWeight: 500, color: t.text, background: "transparent", border: `1.5px solid ${t.border}`, borderRadius: 100, padding: "clamp(10px,2vw,13px) clamp(20px,4vw,32px)", cursor: "pointer", transition: "all .3s ease" }}
           onMouseEnter={e => { e.currentTarget.style.borderColor = t.accent; e.currentTarget.style.color = t.accent; }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.color = t.text; }}>Ver servicios</button>
       </div>
@@ -434,9 +441,24 @@ function Services({ isMobile }) {
           <FadeUp delay={0.4}><p style={{ fontSize: 15, color: t.textMuted, lineHeight: 1.6, maxWidth: 480, margin: "16px auto 0" }}>Cada servicio diseñado para impulsar tu eCommerce con tecnología, datos y estrategia.</p></FadeUp>
           <h2 style={{ width: 0, height: 0, overflow: "hidden", opacity: 0, position: "absolute", pointerEvents: "none" }}>{seo.h2Services}</h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: 16 }}>
-          {services.map((s, i) => <ServiceCard key={s.title} service={s} index={i} isMobile={isMobile} onOpen={setModal} />)}
-        </div>
+        {isMobile ? (
+          <div style={{
+            display: "flex", gap: 12, overflowX: "auto", scrollSnapType: "x mandatory",
+            padding: "0 4px 8px", scrollbarWidth: "none", WebkitOverflowScrolling: "touch",
+          }}>
+            <style>{`.svc-scroll::-webkit-scrollbar{display:none}`}</style>
+            {services.map((s, i) => (
+              <div key={s.title} className="svc-scroll" style={{ minWidth: 260, maxWidth: 260, scrollSnapAlign: "start", flexShrink: 0 }}>
+                <ServiceCard service={s} index={i} isMobile={isMobile} onOpen={setModal} />
+              </div>
+            ))}
+            <div style={{ minWidth: 1, flexShrink: 0 }} />
+          </div>
+        ) : (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+            {services.map((s, i) => <ServiceCard key={s.title} service={s} index={i} isMobile={isMobile} onOpen={setModal} />)}
+          </div>
+        )}
       </div>
       {modal && <ServiceModal service={modal} onClose={() => setModal(null)} isMobile={isMobile} />}
     </section>
@@ -1128,9 +1150,21 @@ export default function LaDigital() {
   }, [content, loaded]);
 
   const go = () => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
+
+  // Real screen width detection for production
+  const [screenW, setScreenW] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
+  useEffect(() => {
+    const h = () => setScreenW(window.innerWidth);
+    window.addEventListener("resize", h);
+    return () => window.removeEventListener("resize", h);
+  }, []);
+
+  // In admin mode, toolbar controls the preview; in production, use real screen width
   const viewWidth = isAdmin ? (view === "mobile" ? 375 : view === "tablet" ? 768 : "100%") : "100%";
-  const isMobile = isAdmin ? view === "mobile" : false;
-  const isMobileOrTablet = isAdmin ? view !== "desktop" : false;
+  const realMobile = screenW < 640;
+  const realTablet = screenW < 900;
+  const isMobile = isAdmin ? view === "mobile" : realMobile;
+  const isMobileOrTablet = isAdmin ? view !== "desktop" : realTablet;
 
   return (
     <ContentCtx.Provider value={content}>
