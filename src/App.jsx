@@ -17,8 +17,8 @@ const LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfUAAAB4CAYAAADrEWuj
 /* ═══ CONTENT ═══ */
 const defaultContent = {
   seo: {
-    metaTitle: "LA DIGITAL | Agencia Shopify, Meta Ads, Google Ads e IA para eCommerce",
-    metaDescription: "Agencia eCommerce especializada en desarrollo Shopify, campañas en Meta Ads y Google Ads e inteligencia artificial aplicada a tiendas online. Basque Country, España.",
+    metaTitle: "LA DIGITAL | Agencia Shopify, Meta Ads y Google Ads",
+    metaDescription: "Agencia eCommerce en Shopify, Meta Ads, Google Ads e IA aplicada. Desarrollo, publicidad digital y consultoría para marcas online. País Vasco.",
     h1: "Agencia eCommerce Shopify, publicidad digital e inteligencia artificial para marcas que quieren escalar",
     h2Services: "Servicios de desarrollo Shopify, gestión de Meta Ads y Google Ads, y consultoría IA",
     h2Tech: "Plataformas y herramientas que dominamos",
@@ -134,18 +134,10 @@ function ArrowR({ s = 14, c = "currentColor" }) { return <svg width={s} height={
 /* ═══ FONTS ═══ */
 function Fonts() {
   useEffect(() => {
-    // Ensure viewport meta exists
-    if (!document.querySelector('meta[name="viewport"]')) {
-      const vp = document.createElement("meta");
-      vp.name = "viewport";
-      vp.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-      document.head.appendChild(vp);
-    }
-    const l = document.createElement("link"); l.href = "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"; l.rel = "stylesheet"; document.head.appendChild(l);
     const s = document.createElement("style");
-    s.textContent = `*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{margin:0;background:#FFFFFF;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}::selection{background:${t.accent}20}@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,textarea:-webkit-autofill,select:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #141413 inset!important;-webkit-text-fill-color:#fff!important;transition:background-color 5000s ease-in-out 0s;caret-color:#fff}input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}select option{background:#141413;color:#fff}.svc-scroll::-webkit-scrollbar{display:none}[data-cases-scroll]::-webkit-scrollbar{display:none}`;
+    s.textContent = `html{scroll-behavior:smooth}::selection{background:${t.accent}20}@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,textarea:-webkit-autofill,select:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #141413 inset!important;-webkit-text-fill-color:#fff!important;transition:background-color 5000s ease-in-out 0s;caret-color:#fff}input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}select option{background:#141413;color:#fff}.svc-scroll::-webkit-scrollbar{display:none}[data-cases-scroll]::-webkit-scrollbar{display:none}`;
     document.head.appendChild(s);
-    return () => { document.head.removeChild(l); document.head.removeChild(s); };
+    return () => { document.head.removeChild(s); };
   }, []); return null;
 }
 
@@ -224,7 +216,7 @@ function Hero({ onContact, isMobile }) {
         </span>
       </div>
       {/* Semantic H1 for SEO — visually hidden */}
-      <h1 style={{ width: 0, height: 0, overflow: "hidden", opacity: 0, position: "absolute", pointerEvents: "none" }}>{seo.h1}</h1>
+      <h1 style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", borderWidth: 0 }}>{seo.h1}</h1>
 
       <p style={{ ...a(0.8), fontSize: "clamp(13px, 2vw, 18px)", fontWeight: 400, lineHeight: 1.65, color: t.textMuted, maxWidth: 460, marginTop: "clamp(12px, 3vw, 24px)", padding: "0 4px" }}>{hero.subtitle}</p>
 
