@@ -874,6 +874,42 @@ function Contact() {
   );
 }
 
+/* ═══ COOKIE BANNER ═══ */
+function CookieBanner() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    try {
+      const consent = localStorage.getItem("ld-cookie-consent");
+      if (!consent) setShow(true);
+    } catch { setShow(true); }
+  }, []);
+  const accept = () => { try { localStorage.setItem("ld-cookie-consent", "accepted"); } catch {} setShow(false); };
+  const reject = () => { try { localStorage.setItem("ld-cookie-consent", "rejected"); } catch {} setShow(false); };
+  if (!show) return null;
+  return (
+    <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 999, background: "rgba(20,20,19,0.97)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", padding: "20px clamp(16px,5vw,40px)", borderTop: `1px solid rgba(90,154,110,0.2)`, animation: "slideUp .4s ease" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, flexWrap: "wrap" }}>
+        <div style={{ flex: 1, minWidth: 280 }}>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.8)", lineHeight: 1.6, margin: 0 }}>
+            Utilizamos cookies técnicas necesarias para el funcionamiento del sitio. No utilizamos cookies de marketing ni analíticas.
+            <span style={{ color: "rgba(255,255,255,0.45)", fontSize: 12 }}> Más info en nuestra Política de Cookies.</span>
+          </p>
+        </div>
+        <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+          <button onClick={reject} style={{ fontSize: 12.5, fontWeight: 500, color: "rgba(255,255,255,0.6)", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "10px 20px", cursor: "pointer", transition: "all .2s", fontFamily: "inherit" }}
+            onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.12)"}
+            onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
+          >Rechazar</button>
+          <button onClick={accept} style={{ fontSize: 12.5, fontWeight: 500, color: "#fff", background: t.accent, border: "none", borderRadius: 8, padding: "10px 20px", cursor: "pointer", transition: "all .2s", fontFamily: "inherit" }}
+            onMouseEnter={e => e.currentTarget.style.background = t.accentHover}
+            onMouseLeave={e => e.currentTarget.style.background = t.accent}
+          >Aceptar</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ═══ LEGAL MODAL ═══ */
 function LegalModal({ title, children, onClose }) {
   useEffect(() => { document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = ""; }; }, []);
@@ -892,24 +928,46 @@ function LegalModal({ title, children, onClose }) {
   );
 }
 
+const S = ({ children }) => <strong style={{ color: t.text }}>{children}</strong>;
+const P = ({ children }) => <p style={{ marginTop: 16 }}>{children}</p>;
+
 const PrivacyContent = () => (
   <div>
-    <p><strong style={{ color: t.text }}>Responsable del tratamiento</strong><br />LA DIGITAL · Donostia / San Sebastián, País Vasco, España<br />Email: info@la-digital.es</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Datos que recopilamos</strong><br />A través del formulario de contacto recopilamos: nombre, email, servicio de interés y mensaje. Estos datos se utilizan exclusivamente para responder a tu consulta y ofrecerte información sobre nuestros servicios.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Base legal</strong><br />El tratamiento de tus datos se basa en tu consentimiento al enviar el formulario de contacto. Puedes retirar tu consentimiento en cualquier momento enviando un email a info@la-digital.es.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Destinatarios</strong><br />Tus datos no serán cedidos a terceros salvo obligación legal. Utilizamos Resend como proveedor de email transaccional para procesar los envíos del formulario.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Conservación</strong><br />Los datos se conservarán mientras exista interés mutuo y durante los plazos legales aplicables.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Tus derechos</strong><br />Puedes ejercer tus derechos de acceso, rectificación, supresión, portabilidad y oposición enviando un email a info@la-digital.es. También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).</p>
+    <P><S>1. Responsable del tratamiento</S><br />Rubén González Leonardo<br />NIF: 71507934Z<br />Domicilio: C/ Pagola 31, Donostia / San Sebastián, País Vasco<br />Email: info@la-digital.es<br />Web: ladigital.es</P>
+    <P><S>2. Finalidad del tratamiento</S><br />Los datos personales recabados a través del formulario de contacto se tratan con la finalidad de atender tu consulta y ofrecerte información sobre los servicios de LA DIGITAL. No se elaboran perfiles ni se toman decisiones automatizadas.</P>
+    <P><S>3. Base legal</S><br />El tratamiento se basa en el consentimiento del interesado (art. 6.1.a RGPD), otorgado al enviar el formulario de contacto. Puedes retirar tu consentimiento en cualquier momento sin que ello afecte a la licitud del tratamiento previo.</P>
+    <P><S>4. Datos que recopilamos</S><br />A través del formulario de contacto: nombre, dirección de email, servicio de interés y mensaje. No se recopilan datos sensibles ni categorías especiales de datos.</P>
+    <P><S>5. Destinatarios</S><br />Tus datos no serán cedidos a terceros salvo obligación legal. Utilizamos los siguientes encargados del tratamiento: Resend (envío de emails transaccionales, servidores en EE.UU. con cláusulas contractuales tipo), Vercel Inc. (alojamiento web, servidores en EE.UU. con cláusulas contractuales tipo).</P>
+    <P><S>6. Plazo de conservación</S><br />Los datos se conservarán mientras exista interés mutuo en mantener la relación comercial y, posteriormente, durante los plazos legalmente exigidos para atender posibles responsabilidades (5 años).</P>
+    <P><S>7. Derechos del interesado</S><br />Puedes ejercer tus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición enviando un email a info@la-digital.es indicando tu nombre y el derecho que deseas ejercer. Tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</P>
+    <P><S>8. Seguridad</S><br />Hemos adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad de tus datos, incluyendo cifrado SSL/TLS en todas las comunicaciones.</P>
+    <p style={{ marginTop: 24, fontSize: 12, color: t.textMuted }}>Última actualización: marzo de 2026</p>
   </div>
 );
 
 const CookiesContent = () => (
   <div>
-    <p><strong style={{ color: t.text }}>¿Qué son las cookies?</strong><br />Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Sirven para que el sitio funcione correctamente y para recopilar información sobre la navegación.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Cookies que utilizamos</strong><br />Esta web utiliza únicamente cookies técnicas necesarias para el funcionamiento del sitio. No utilizamos cookies de marketing, analíticas ni de terceros que rastreen tu actividad.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Cookies técnicas</strong><br />Son estrictamente necesarias para la navegación y el uso de las funcionalidades básicas del sitio. No requieren consentimiento.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>¿Cómo desactivar las cookies?</strong><br />Puedes configurar tu navegador para bloquear o eliminar las cookies. Ten en cuenta que esto puede afectar al funcionamiento de algunos elementos de la web.</p>
-    <p style={{ marginTop: 16 }}><strong style={{ color: t.text }}>Más información</strong><br />Para cualquier consulta sobre nuestra política de cookies, contacta con nosotros en info@la-digital.es.</p>
+    <P><S>1. ¿Qué son las cookies?</S><br />Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas un sitio web. Permiten que el sitio funcione correctamente y pueden recopilar información sobre tu navegación.</P>
+    <P><S>2. Responsable</S><br />Rubén González Leonardo · NIF: 71507934Z · Email: info@la-digital.es</P>
+    <P><S>3. Cookies que utilizamos</S><br />Esta web utiliza únicamente cookies técnicas estrictamente necesarias para el funcionamiento del sitio:<br /><br />
+    • <S>ld-cookie-consent</S> — Almacena tu preferencia de aceptación/rechazo de cookies. Duración: 1 año. Tipo: técnica, propia.<br /><br />
+    No utilizamos cookies de análisis, de personalización, publicitarias ni de terceros.</P>
+    <P><S>4. Base legal</S><br />Las cookies técnicas estrictamente necesarias están exentas de consentimiento según el artículo 22.2 de la LSSI-CE. No obstante, te informamos de su uso mediante este aviso y el banner de cookies.</P>
+    <P><S>5. Cómo gestionar las cookies</S><br />Puedes configurar tu navegador para bloquear o eliminar las cookies. Ten en cuenta que esto podría afectar al funcionamiento de la web. Instrucciones por navegador: Chrome (chrome://settings/cookies), Safari (Preferencias {'>'} Privacidad), Firefox (about:preferences#privacy).</P>
+    <P><S>6. Transferencias internacionales</S><br />La web está alojada en Vercel Inc. (EE.UU.) que cumple con las cláusulas contractuales tipo aprobadas por la Comisión Europea.</P>
+    <p style={{ marginTop: 24, fontSize: 12, color: t.textMuted }}>Última actualización: marzo de 2026</p>
+  </div>
+);
+
+const AvisoLegalContent = () => (
+  <div>
+    <P><S>1. Datos identificativos</S><br />En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa:<br /><br />
+    Titular: Rubén González Leonardo<br />NIF: 71507934Z<br />Domicilio: C/ Pagola 31, Donostia / San Sebastián, País Vasco, España<br />Email: info@la-digital.es<br />Actividad: Servicios de desarrollo web, publicidad digital y consultoría eCommerce</P>
+    <P><S>2. Objeto</S><br />El presente sitio web (ladigital.es) tiene como finalidad proporcionar información sobre los servicios profesionales de LA DIGITAL y facilitar el contacto con potenciales clientes.</P>
+    <P><S>3. Propiedad intelectual e industrial</S><br />Todos los contenidos de este sitio web, incluyendo textos, diseños gráficos, imágenes, código fuente y logotipos, son propiedad de Rubén González Leonardo o se utilizan con la debida autorización, y están protegidos por la legislación sobre propiedad intelectual e industrial. Queda prohibida su reproducción, distribución o modificación sin autorización expresa.</P>
+    <P><S>4. Exclusión de responsabilidad</S><br />LA DIGITAL no se hace responsable de los daños que pudieran derivarse del uso de la información contenida en esta web. Los enlaces a sitios de terceros se proporcionan a título informativo, sin que LA DIGITAL asuma responsabilidad alguna sobre sus contenidos.</P>
+    <P><S>5. Legislación aplicable</S><br />Las presentes condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales de Donostia / San Sebastián.</P>
+    <p style={{ marginTop: 24, fontSize: 12, color: t.textMuted }}>Última actualización: marzo de 2026</p>
   </div>
 );
 
@@ -927,12 +985,14 @@ function Footer() {
             </div>
             <span style={{ fontSize: 12, color: t.textMuted }}>© {new Date().getFullYear()} LA DIGITAL · Basque Country</span>
           </div>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 16 }}>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 16, flexWrap: "wrap" }}>
+            <button onClick={() => setLegal("aviso")} style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = t.accent} onMouseLeave={e => e.currentTarget.style.color = t.textMuted}>Aviso Legal</button>
             <button onClick={() => setLegal("privacy")} style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = t.accent} onMouseLeave={e => e.currentTarget.style.color = t.textMuted}>Política de Privacidad</button>
             <button onClick={() => setLegal("cookies")} style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = t.accent} onMouseLeave={e => e.currentTarget.style.color = t.textMuted}>Política de Cookies</button>
           </div>
         </footer>
       </FadeUp>
+      {legal === "aviso" && <LegalModal title="Aviso Legal" onClose={() => setLegal(null)}><AvisoLegalContent /></LegalModal>}
       {legal === "privacy" && <LegalModal title="Política de Privacidad" onClose={() => setLegal(null)}><PrivacyContent /></LegalModal>}
       {legal === "cookies" && <LegalModal title="Política de Cookies" onClose={() => setLegal(null)}><CookiesContent /></LegalModal>}
     </>
@@ -1180,6 +1240,7 @@ export default function LaDigital() {
           <Contact />
           <Footer />
         </div>
+        <CookieBanner />
         {isAdmin && <Toolbar view={view} setView={setView} editOpen={editOpen} setEditOpen={setEditOpen} />}
         {isAdmin && editOpen && <AdminPanel content={content} setContent={setContent} onClose={() => setEditOpen(false)} />}
       </div>
