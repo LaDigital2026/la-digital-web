@@ -280,7 +280,7 @@ function ServiceModal({ service, onClose, isMobile }) {
 
         {/* Image header — aspect ratio based */}
         <div style={{
-          position: "relative", width: "100%", paddingTop: isMobile ? "45%" : "38%", overflow: "hidden",
+          position: "relative", width: "100%", paddingTop: isMobile ? "45%" : "50%", overflow: "hidden",
           background: t.dark,
         }}>
           <img src={hdr.img} alt={service.title} style={{
@@ -300,7 +300,7 @@ function ServiceModal({ service, onClose, isMobile }) {
         </div>
 
         {/* Content */}
-        <div style={{ padding: isMobile ? "20px 20px 28px" : "28px 32px 32px", overflowY: "auto", maxHeight: isMobile ? "calc(90vh - 50vw)" : "calc(88vh - 240px)" }}>
+        <div style={{ padding: isMobile ? "20px 20px 28px" : "28px 32px 32px", overflowY: "auto", maxHeight: isMobile ? "calc(90vh - 50vw)" : "calc(88vh - 300px)" }}>
           <span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 6 }}>{service.sub}</span>
           <h3 style={{ fontSize: isMobile ? 20 : 24, fontWeight: 600, color: t.text, letterSpacing: "-0.02em", margin: "0 0 12px", lineHeight: 1.2 }}>{service.detail.title}</h3>
           <p style={{ fontSize: isMobile ? 14 : 15, lineHeight: 1.7, color: t.textMuted, marginBottom: 20 }}>{service.detail.body}</p>
