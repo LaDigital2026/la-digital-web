@@ -428,17 +428,10 @@ function Services({ isMobile }) {
           <h2 style={{ width: 0, height: 0, overflow: "hidden", opacity: 0, position: "absolute", pointerEvents: "none" }}>{seo.h2Services}</h2>
         </div>
         {isMobile ? (
-          <div style={{
-            display: "flex", gap: 12, overflowX: "auto", scrollSnapType: "x mandatory",
-            padding: "0 4px 8px", scrollbarWidth: "none", WebkitOverflowScrolling: "touch",
-          }}>
-            <style>{`.svc-scroll::-webkit-scrollbar{display:none}`}</style>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, padding: "0 4px" }}>
             {services.map((s, i) => (
-              <div key={s.title} className="svc-scroll" style={{ minWidth: 260, maxWidth: 260, scrollSnapAlign: "start", flexShrink: 0 }}>
-                <ServiceCard service={s} index={i} isMobile={isMobile} onOpen={setModal} />
-              </div>
+              <ServiceCard key={s.title} service={s} index={i} isMobile={isMobile} onOpen={setModal} />
             ))}
-            <div style={{ minWidth: 1, flexShrink: 0 }} />
           </div>
         ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
