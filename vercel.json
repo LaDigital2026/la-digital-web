@@ -1,5 +1,16 @@
 {
-  "framework": "create-react-app",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build"
+  "rewrites": [
+    { "source": "/agencia-shopify-donostia", "destination": "/" },
+    { "source": "/agencia-shopify-donostia/", "destination": "/" },
+    { "source": "/agencia-shopify-bilbao", "destination": "/" },
+    { "source": "/agencia-shopify-bilbao/", "destination": "/" },
+    { "source": "/agencia-shopify-vitoria", "destination": "/" },
+    { "source": "/agencia-shopify-vitoria/", "destination": "/" },
+    { "source": "/meta-ads-donostia", "destination": "/" },
+    { "source": "/meta-ads-donostia/", "destination": "/" },
+    { "source": "/meta-ads-bilbao", "destination": "/" },
+    { "source": "/meta-ads-bilbao/", "destination": "/" },
+    { "source": "/meta-ads-vitoria", "destination": "/" },
+    { "source": "/meta-ads-vitoria/", "destination": "/" }
+  ]
 }
