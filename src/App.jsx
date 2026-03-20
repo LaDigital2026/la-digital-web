@@ -1115,11 +1115,38 @@ function Toolbar({ view, setView, editOpen, setEditOpen }) {
   );
 }
 
+/* ═══ CITY LANDINGS ═══ */
+const CITY_PAGES = {
+  "agencia-shopify-donostia": { tag: "Agencia Shopify · Donostia · País Vasco", heroLight: "Agencia Shopify", heroBold: "en Donostia", subtitle: "Desarrollamos y optimizamos tu tienda Shopify en Donostia / San Sebastián. Migración desde cualquier plataforma, diseño custom, Meta Ads, Google Ads e inteligencia artificial aplicada a tu eCommerce.", h1: "Agencia Shopify en Donostia / San Sebastián" },
+  "agencia-shopify-bilbao": { tag: "Agencia Shopify · Bilbao · País Vasco", heroLight: "Agencia Shopify", heroBold: "en Bilbao", subtitle: "Desarrollamos y optimizamos tu tienda Shopify en Bilbao. Migración desde PrestaShop, WooCommerce o cualquier plataforma. Diseño custom, Meta Ads, Google Ads e IA para escalar tu negocio online.", h1: "Agencia Shopify en Bilbao" },
+  "agencia-shopify-vitoria": { tag: "Agencia Shopify · Vitoria · País Vasco", heroLight: "Agencia Shopify", heroBold: "en Vitoria", subtitle: "Desarrollamos y optimizamos tu tienda Shopify en Vitoria-Gasteiz. Migración, diseño custom, campañas en Meta Ads y Google Ads, e IA aplicada a marcas que quieren escalar en Álava.", h1: "Agencia Shopify en Vitoria-Gasteiz" },
+  "meta-ads-donostia": { tag: "Meta Ads · Donostia · País Vasco", heroLight: "Campañas Meta Ads", heroBold: "en Donostia", subtitle: "Gestionamos tus campañas en Meta Ads desde Donostia. Estrategia full-funnel, creatividades optimizadas, A/B testing y maximización de ROAS para tu eCommerce.", h1: "Agencia Meta Ads en Donostia / San Sebastián" },
+  "meta-ads-bilbao": { tag: "Meta Ads · Bilbao · País Vasco", heroLight: "Campañas Meta Ads", heroBold: "en Bilbao", subtitle: "Gestionamos tus campañas en Meta Ads desde Bilbao. Publicidad en Facebook e Instagram con estrategia full-funnel y maximización de ROAS para tu tienda online.", h1: "Agencia Meta Ads en Bilbao" },
+  "meta-ads-vitoria": { tag: "Meta Ads · Vitoria · País Vasco", heroLight: "Campañas Meta Ads", heroBold: "en Vitoria", subtitle: "Gestionamos tus campañas en Meta Ads desde Vitoria-Gasteiz. Estrategia full-funnel para Facebook e Instagram y maximización de ROAS para marcas en Álava.", h1: "Agencia Meta Ads en Vitoria-Gasteiz" },
+};
+
+function detectCity() {
+  try {
+    const path = window.location.pathname.replace(/^\/|\/$/g, "").replace(/\/index\.html$/, "");
+    return CITY_PAGES[path] || null;
+  } catch { return null; }
+}
+
 /* ═══ MAIN ═══ */
 const STORAGE_KEY = "la-digital-content";
 
 export default function LaDigital() {
-  const [content, setContent] = useState(defaultContent);
+  const [content, setContent] = useState(() => {
+    const city = detectCity();
+    if (city) {
+      return {
+        ...defaultContent,
+        hero: { ...defaultContent.hero, tag: city.tag, titleLight: city.heroLight, titleBold: city.heroBold, subtitle: city.subtitle },
+        seo: { ...defaultContent.seo, h1: city.h1 },
+      };
+    }
+    return defaultContent;
+  });
   const [view, setView] = useState("desktop");
   const [editOpen, setEditOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
