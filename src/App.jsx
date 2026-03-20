@@ -278,29 +278,29 @@ function ServiceModal({ service, onClose, isMobile }) {
         {/* Drag handle on mobile */}
         {isMobile && <div style={{ padding: "10px 0 0", display: "flex", justifyContent: "center" }}><div style={{ width: 36, height: 4, borderRadius: 2, background: t.border }} /></div>}
 
-        {/* Image header */}
+        {/* Image header — aspect ratio based */}
         <div style={{
-          position: "relative", height: isMobile ? 180 : 220, overflow: "hidden",
+          position: "relative", width: "100%", paddingTop: isMobile ? "45%" : "38%", overflow: "hidden",
           background: t.dark,
         }}>
           <img src={hdr.img} alt={service.title} style={{
-            width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%",
-            opacity: 0.9,
+            position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
+            objectFit: "cover", objectPosition: "center 30%",
           }} />
           <button onClick={onClose} style={{
             position: "absolute", top: isMobile ? 8 : 12, right: isMobile ? 8 : 12,
-            background: "rgba(0,0,0,0.4)", backdropFilter: "blur(10px)",
+            background: "rgba(0,0,0,0.5)", backdropFilter: "blur(10px)",
             border: "none", borderRadius: 100,
             width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center",
             cursor: "pointer", fontSize: 14, color: "#fff", transition: "all .2s", zIndex: 2,
           }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.6)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.4)"; }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.7)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.5)"; }}
           >✕</button>
         </div>
 
         {/* Content */}
-        <div style={{ padding: isMobile ? "20px 20px 28px" : "28px 32px 32px", overflowY: "auto", maxHeight: isMobile ? "calc(90vh - 194px)" : "calc(88vh - 220px)" }}>
+        <div style={{ padding: isMobile ? "20px 20px 28px" : "28px 32px 32px", overflowY: "auto", maxHeight: isMobile ? "calc(90vh - 50vw)" : "calc(88vh - 240px)" }}>
           <span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 6 }}>{service.sub}</span>
           <h3 style={{ fontSize: isMobile ? 20 : 24, fontWeight: 600, color: t.text, letterSpacing: "-0.02em", margin: "0 0 12px", lineHeight: 1.2 }}>{service.detail.title}</h3>
           <p style={{ fontSize: isMobile ? 14 : 15, lineHeight: 1.7, color: t.textMuted, marginBottom: 20 }}>{service.detail.body}</p>
