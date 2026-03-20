@@ -1126,7 +1126,17 @@ function Toolbar({ view, setView, editOpen, setEditOpen }) {
 const STORAGE_KEY = "la-digital-content";
 
 export default function LaDigital() {
-  const [content, setContent] = useState(defaultContent);
+  const [content, setContent] = useState(() => {
+    const city = typeof window !== "undefined" && window.__LA_DIGITAL_CITY__;
+    if (city) {
+      return {
+        ...defaultContent,
+        hero: { ...defaultContent.hero, tag: city.tag || defaultContent.hero.tag, titleLight: city.heroLight || defaultContent.hero.titleLight, titleBold: city.heroBold || defaultContent.hero.titleBold, subtitle: city.subtitle || defaultContent.hero.subtitle },
+        seo: { ...defaultContent.seo, h1: city.h1 || defaultContent.seo.h1 },
+      };
+    }
+    return defaultContent;
+  });
   const [view, setView] = useState("desktop");
   const [editOpen, setEditOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
