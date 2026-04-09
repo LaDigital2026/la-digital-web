@@ -1,5 +1,6 @@
 // v6 - mobile popups, navbar spacing, hero margins
 import { useState, useEffect, useRef, useCallback, createContext, useContext } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const SLACK_CHANNEL_ID = "C06LB0SMXPV";
 
@@ -1245,6 +1246,7 @@ export default function LaDigital() {
           <Cases isMobile={isMobileOrTablet} />
           <Contact />
           <Footer />
+          <Analytics />
         </div>
         <CookieBanner />
         {isAdmin && <Toolbar view={view} setView={setView} editOpen={editOpen} setEditOpen={setEditOpen} />}
