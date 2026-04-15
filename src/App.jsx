@@ -1,6 +1,5 @@
 // v6 - mobile popups, navbar spacing, hero margins
 import { useState, useEffect, useRef, useCallback, createContext, useContext } from "react";
-import { Analytics } from "@vercel/analytics/react";
 
 const SLACK_CHANNEL_ID = "C06LB0SMXPV";
 
@@ -523,6 +522,112 @@ function Process({ isMobile }) {
               </div>
             </SlideLeft>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══ ABOUT — SOBRE MÍ ═══ */
+function About({ isMobile }) {
+  return (
+    <section id="sobre-mi" style={{ padding: "80px clamp(16px,5vw,72px)", background: t.bg, position: "relative", overflow: "hidden" }}>
+      {/* Subtle decorative elements */}
+      <div style={{ position: "absolute", top: "10%", right: "-5%", width: 320, height: 320, borderRadius: "50%", background: `radial-gradient(circle, ${t.accent}08 0%, transparent 70%)`, filter: "blur(60px)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: "0%", left: "-8%", width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle, ${t.accent}05 0%, transparent 70%)`, filter: "blur(50px)", pointerEvents: "none" }} />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <FadeUp><span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 12 }}>Founder · LA DIGITAL</span></FadeUp>
+          <div>
+            <WordReveal text="Hola, soy" delay={0} />
+            {" "}
+            <WordReveal text="Rubén" bold color={t.accent} delay={0.2} />
+          </div>
+        </div>
+
+        {/* Content grid: photo + bio */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "320px 1fr",
+          gap: isMobile ? 32 : 56,
+          alignItems: "center",
+          maxWidth: 920,
+          margin: "0 auto",
+        }}>
+          {/* Photo */}
+          <SlideLeft>
+            <div style={{
+              position: "relative",
+              width: isMobile ? "70%" : "100%",
+              maxWidth: 320,
+              aspectRatio: "1",
+              margin: isMobile ? "0 auto" : "0",
+              borderRadius: 20,
+              overflow: "hidden",
+              boxShadow: "0 24px 48px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)",
+            }}>
+              <img src="/ruben-photo.jpg" alt="Rubén González · Founder LA DIGITAL" style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+              }} />
+              {/* Subtle accent corner */}
+              <div style={{
+                position: "absolute", top: -1, right: -1,
+                background: t.accent, color: "#fff",
+                fontSize: 9, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
+                padding: "6px 12px", borderRadius: "0 20px 0 16px",
+              }}>Founder</div>
+            </div>
+          </SlideLeft>
+
+          {/* Bio */}
+          <SlideRight delay={0.15}>
+            <div>
+              <p style={{
+                fontSize: isMobile ? 15 : 16.5, lineHeight: 1.75, color: t.text, marginBottom: 18,
+              }}>
+                Más de <strong style={{ color: t.text }}>12 años</strong> de experiencia en marketing digital, especializado en proyectos eCommerce sobre <strong style={{ color: t.text }}>Shopify Plus</strong>, además de PrestaShop, WooCommerce y Magento.
+              </p>
+              <p style={{
+                fontSize: isMobile ? 14 : 15, lineHeight: 1.7, color: t.textMuted, marginBottom: 24,
+              }}>
+                Colaboro en la estrategia digital de varios eCommerce, entre ellos <strong style={{ color: t.text }}>BATELA</strong> y <strong style={{ color: t.text }}>TANTÄ</strong>, gestionando crecimiento, conversión y experiencia de usuario. Aumentando ventas en más de un <strong style={{ color: t.accent }}>70% en 3 años</strong>.
+              </p>
+
+              {/* Mini features */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
+                {[
+                  "Especialista en Shopify Plus y migraciones eCommerce",
+                  "Gestión de campañas Meta Ads y Google Ads con foco en ROAS",
+                  "Red de colaboradores: diseño, dev, copywriting y datos",
+                ].map((txt, i) => (
+                  <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ width: 14, height: 1.5, background: t.accent, marginTop: 10, flexShrink: 0, opacity: 0.6 }} />
+                    <span style={{ fontSize: 13.5, color: t.text, lineHeight: 1.55 }}>{txt}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* LinkedIn button */}
+              <a href="https://www.linkedin.com/in/rub%C3%A9n-gonz%C3%A1lez-leonardo-29a58234/" target="_blank" rel="noopener noreferrer" style={{
+                display: "inline-flex", alignItems: "center", gap: 9,
+                fontSize: 13.5, fontWeight: 500, color: "#fff",
+                background: t.accent, border: "none", borderRadius: 100,
+                padding: "12px 22px", cursor: "pointer", transition: "all .3s ease",
+                textDecoration: "none",
+                boxShadow: `0 4px 14px ${t.accent}33`,
+              }}
+                onMouseEnter={e => { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${t.accent}45`; }}
+                onMouseLeave={e => { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 14px ${t.accent}33`; }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                Ver perfil de LinkedIn
+              </a>
+            </div>
+          </SlideRight>
         </div>
       </div>
     </section>
@@ -1243,10 +1348,10 @@ export default function LaDigital() {
           <Services isMobile={isMobileOrTablet} />
           <TechStack />
           <Process isMobile={isMobile} />
+          <About isMobile={isMobile} />
           <Cases isMobile={isMobileOrTablet} />
           <Contact />
           <Footer />
-          <Analytics />
         </div>
         <CookieBanner />
         {isAdmin && <Toolbar view={view} setView={setView} editOpen={editOpen} setEditOpen={setEditOpen} />}
