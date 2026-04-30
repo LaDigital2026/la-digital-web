@@ -1,5 +1,6 @@
 // v6 - mobile popups, navbar spacing, hero margins
 import { useState, useEffect, useRef, useCallback, createContext, useContext } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const SLACK_CHANNEL_ID = "C06LB0SMXPV";
 
@@ -531,13 +532,10 @@ function Process({ isMobile }) {
 /* ═══ ABOUT — SOBRE MÍ ═══ */
 function About({ isMobile }) {
   return (
-    <section id="sobre-mi" style={{ padding: "80px clamp(16px,5vw,72px)", background: t.bg, position: "relative", overflow: "hidden" }}>
-      {/* Subtle decorative elements */}
+    <section id="sobre-mi" style={{ padding: "80px clamp(16px,5vw,72px)", background: t.bgAlt, position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "10%", right: "-5%", width: 320, height: 320, borderRadius: "50%", background: `radial-gradient(circle, ${t.accent}08 0%, transparent 70%)`, filter: "blur(60px)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", bottom: "0%", left: "-8%", width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle, ${t.accent}05 0%, transparent 70%)`, filter: "blur(50px)", pointerEvents: "none" }} />
 
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
-        {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <FadeUp><span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 12 }}>Founder · LA DIGITAL</span></FadeUp>
           <div>
@@ -547,7 +545,6 @@ function About({ isMobile }) {
           </div>
         </div>
 
-        {/* Content grid: photo + bio */}
         <div style={{
           display: "grid",
           gridTemplateColumns: isMobile ? "1fr" : "320px 1fr",
@@ -556,7 +553,6 @@ function About({ isMobile }) {
           maxWidth: 920,
           margin: "0 auto",
         }}>
-          {/* Photo */}
           <SlideLeft>
             <div style={{
               position: "relative",
@@ -571,7 +567,6 @@ function About({ isMobile }) {
               <img src="/ruben-photo.jpg" alt="Rubén González · Founder LA DIGITAL" style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
               }} />
-              {/* Subtle accent corner */}
               <div style={{
                 position: "absolute", top: -1, right: -1,
                 background: t.accent, color: "#fff",
@@ -581,21 +576,15 @@ function About({ isMobile }) {
             </div>
           </SlideLeft>
 
-          {/* Bio */}
           <SlideRight delay={0.15}>
             <div>
-              <p style={{
-                fontSize: isMobile ? 15 : 16.5, lineHeight: 1.75, color: t.text, marginBottom: 18,
-              }}>
-                Más de <strong style={{ color: t.text }}>12 años</strong> de experiencia en marketing digital, especializado en proyectos eCommerce sobre <strong style={{ color: t.text }}>Shopify Plus</strong>, además de PrestaShop, WooCommerce y Magento.
+              <p style={{ fontSize: isMobile ? 15 : 16.5, lineHeight: 1.75, color: t.text, marginBottom: 18 }}>
+                Más de <strong>12 años</strong> de experiencia en marketing digital, especializado en proyectos eCommerce sobre <strong>Shopify Plus</strong>, además de PrestaShop, WooCommerce y Magento.
               </p>
-              <p style={{
-                fontSize: isMobile ? 14 : 15, lineHeight: 1.7, color: t.textMuted, marginBottom: 24,
-              }}>
-                Colaboro en la estrategia digital de varios eCommerce, entre ellos <strong style={{ color: t.text }}>BATELA</strong> y <strong style={{ color: t.text }}>TANTÄ</strong>, gestionando crecimiento, conversión y experiencia de usuario. Aumentando ventas en más de un <strong style={{ color: t.accent }}>70% en 3 años</strong>.
+              <p style={{ fontSize: isMobile ? 14 : 15, lineHeight: 1.7, color: t.textMuted, marginBottom: 24 }}>
+                Colaboro en la estrategia digital de varios eCommerce, gestionando crecimiento, conversión y experiencia de usuario. Aumentando ventas en más de un <strong style={{ color: t.accent }}>70% en 3 años</strong>.
               </p>
 
-              {/* Mini features */}
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
                 {[
                   "Especialista en Shopify Plus y migraciones eCommerce",
@@ -609,7 +598,6 @@ function About({ isMobile }) {
                 ))}
               </div>
 
-              {/* LinkedIn button */}
               <a href="https://www.linkedin.com/in/rub%C3%A9n-gonz%C3%A1lez-leonardo-29a58234/" target="_blank" rel="noopener noreferrer" style={{
                 display: "inline-flex", alignItems: "center", gap: 9,
                 fontSize: 13.5, fontWeight: 500, color: "#fff",
@@ -618,8 +606,8 @@ function About({ isMobile }) {
                 textDecoration: "none",
                 boxShadow: `0 4px 14px ${t.accent}33`,
               }}
-                onMouseEnter={e => { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${t.accent}45`; }}
-                onMouseLeave={e => { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 14px ${t.accent}33`; }}
+                onMouseEnter={e => { e.currentTarget.style.background = t.accentHover; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = t.accent; e.currentTarget.style.transform = "translateY(0)"; }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -630,172 +618,6 @@ function About({ isMobile }) {
           </SlideRight>
         </div>
       </div>
-    </section>
-  );
-}
-
-/* ═══ CASES ═══ */
-function CaseCard({ c, index, isMobile, style: outerStyle = {} }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ ...outerStyle, background: t.card, borderRadius: 16, padding: isMobile ? "24px 20px" : "32px 28px", border: `1px solid ${hov ? t.accent + "30" : t.border}`, transition: "all .3s ease", transform: hov ? "translateY(-2px)" : "none", boxShadow: hov ? "0 12px 36px rgba(0,0,0,0.04)" : "0 1px 3px rgba(0,0,0,0.02)", height: "100%", display: "flex", flexDirection: "column" }}>
-      {/* Logo area */}
-      <div style={{ marginBottom: 16, height: 48, display: "flex", alignItems: "center" }}>
-        {c.logoUrl ? (
-          <img src={c.logoUrl} alt={c.brand} style={{ maxHeight: 40, maxWidth: 140, objectFit: "contain", borderRadius: 4 }} />
-        ) : (
-          <div style={{ height: 40, width: 40, borderRadius: 10, background: t.accentLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 600, color: t.accent }}>
-            {c.brand.charAt(0)}
-          </div>
-        )}
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-        <div>
-          <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: t.accent, background: t.accentLight, padding: "3px 10px", borderRadius: 100 }}>{c.tag}</span>
-          <h3 style={{ fontSize: 19, fontWeight: 500, color: t.text, marginTop: 10, letterSpacing: "-0.01em" }}>{c.brand}</h3>
-        </div>
-        <div style={{ textAlign: "right", flexShrink: 0 }}>
-          {c.metric > 0 ? (
-            <>
-              <div style={{ fontSize: 30, fontWeight: 600, color: t.accent, lineHeight: 1, letterSpacing: "-0.03em" }}>
-                <AnimCounter value={c.metric} prefix={c.metricPrefix} suffix={c.metricSuffix} />
-              </div>
-              <div style={{ fontSize: 11, color: t.textMuted, marginTop: 2 }}>{c.metricLabel}</div>
-            </>
-          ) : (
-            <div style={{ background: t.accentLight, border: `1px solid ${t.accent}20`, borderRadius: 8, padding: "8px 12px" }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: t.accent, letterSpacing: "0.04em" }}>NUEVO</div>
-              <div style={{ fontSize: 10, color: t.textMuted, marginTop: 1 }}>{c.metricLabel}</div>
-            </div>
-          )}
-        </div>
-      </div>
-      <div style={{ width: "100%", height: 1, background: t.border, opacity: 0.6, marginBottom: 12 }} />
-      <p style={{ fontSize: 14, lineHeight: 1.6, color: t.textMuted, margin: "0 0 12px", flex: 1 }}>{c.desc}</p>
-      <div style={{ fontSize: 12, color: t.textMuted, fontWeight: 500, display: "flex", alignItems: "center", gap: 4 }}>
-        <span style={{ width: 12, height: 1, background: t.accent, display: "inline-block", opacity: 0.5 }} />{c.period}
-      </div>
-    </div>
-  );
-}
-
-function CarouselArrow({ direction, onClick, disabled }) {
-  return (
-    <button onClick={onClick} disabled={disabled} style={{
-      width: 40, height: 40, borderRadius: 40, border: `1.5px solid ${disabled ? t.border : t.accent + "40"}`,
-      background: disabled ? "transparent" : t.card, display: "flex", alignItems: "center", justifyContent: "center",
-      cursor: disabled ? "default" : "pointer", transition: "all .2s", opacity: disabled ? 0.3 : 1,
-      boxShadow: disabled ? "none" : "0 2px 8px rgba(0,0,0,0.04)",
-    }}
-      onMouseEnter={e => { if (!disabled) { e.currentTarget.style.background = t.accent; e.currentTarget.style.borderColor = t.accent; e.currentTarget.querySelector("svg").style.stroke = "#fff"; } }}
-      onMouseLeave={e => { if (!disabled) { e.currentTarget.style.background = t.card; e.currentTarget.style.borderColor = t.accent + "40"; e.currentTarget.querySelector("svg").style.stroke = t.text; } }}
-    >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transition: "stroke .2s" }}>
-        {direction === "left"
-          ? <path d="M10 3L5 8L10 13" stroke={t.text} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          : <path d="M6 3L11 8L6 13" stroke={t.text} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        }
-      </svg>
-    </button>
-  );
-}
-
-function Cases({ isMobile }) {
-  const { cases } = useContext(ContentCtx);
-  const scrollRef = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(false);
-  const [inView, setInView] = useState(false);
-  const sectionRef = useRef(null);
-
-  // Check scroll availability
-  const checkScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanLeft(el.scrollLeft > 5);
-    setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
-  }, []);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    checkScroll();
-    el.addEventListener("scroll", checkScroll, { passive: true });
-    window.addEventListener("resize", checkScroll);
-    return () => { el.removeEventListener("scroll", checkScroll); window.removeEventListener("resize", checkScroll); };
-  }, [checkScroll, cases.length]);
-
-  // Intersection observer for entrance animation
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.unobserve(el); } }, { threshold: 0.1 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  const scroll = (dir) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const cardW = isMobile ? 300 : 370;
-    el.scrollBy({ left: dir === "left" ? -cardW : cardW, behavior: "smooth" });
-  };
-
-  const cardWidth = isMobile ? 280 : 350;
-  const showArrows = cases.length > (isMobile ? 1 : 3);
-
-  return (
-    <section id="casos" ref={sectionRef} style={{ padding: "72px 0", background: t.bgAlt, overflow: "hidden" }}>
-      <div style={{ maxWidth: 1220, margin: "0 auto", padding: "0 clamp(16px,5vw,72px)" }}>
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <FadeUp><span style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: t.accent, display: "block", marginBottom: 12 }}>Casos de éxito</span></FadeUp>
-          <div>
-            <WordReveal text="Resultados que" delay={0} />
-            <br />
-            <WordReveal text="hablan por sí solos" bold delay={0.25} />
-          </div>
-        </div>
-
-        {/* Arrows */}
-        {showArrows && (
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginBottom: 16, padding: "0 4px" }}>
-            <CarouselArrow direction="left" onClick={() => scroll("left")} disabled={!canLeft} />
-            <CarouselArrow direction="right" onClick={() => scroll("right")} disabled={!canRight} />
-          </div>
-        )}
-      </div>
-
-      {/* Scrollable track */}
-      <div ref={scrollRef} style={{
-        display: "flex", gap: 16, overflowX: cases.length > 3 ? "auto" : "visible", scrollSnapType: "x mandatory",
-        padding: `0 clamp(16px,5vw,72px) 8px`, scrollbarWidth: "none",
-        WebkitOverflowScrolling: "touch",
-        justifyContent: cases.length <= 3 ? "center" : "flex-start",
-      }}>
-        <style>{`[data-cases-scroll]::-webkit-scrollbar{display:none}`}</style>
-        {cases.map((c, i) => (
-          <div key={i} data-cases-scroll="" style={{
-            minWidth: cardWidth, maxWidth: cardWidth, scrollSnapAlign: "start", flexShrink: 0,
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateX(0) scale(1)" : `translateX(${60 + i * 20}px) scale(0.95)`,
-            transition: `opacity .7s cubic-bezier(.16,1,.3,1) ${i * 0.1}s, transform .8s cubic-bezier(.16,1,.3,1) ${i * 0.1}s`,
-          }}>
-            <CaseCard c={c} index={i} isMobile={isMobile} />
-          </div>
-        ))}
-        {/* Spacer at end for padding */}
-        <div style={{ minWidth: 1, flexShrink: 0 }} />
-      </div>
-
-      {/* Dot indicators */}
-      {cases.length > 3 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: 6, marginTop: 20 }}>
-          {cases.map((_, i) => (
-            <div key={i} style={{ width: 6, height: 6, borderRadius: 6, background: t.accent, opacity: 0.2 + (i === 0 ? 0.5 : 0), transition: "opacity .3s" }} />
-          ))}
-        </div>
-      )}
     </section>
   );
 }
@@ -1349,11 +1171,11 @@ export default function LaDigital() {
           <TechStack />
           <Process isMobile={isMobile} />
           <About isMobile={isMobile} />
-          <Cases isMobile={isMobileOrTablet} />
           <Contact />
           <Footer />
         </div>
         <CookieBanner />
+        <Analytics />
         {isAdmin && <Toolbar view={view} setView={setView} editOpen={editOpen} setEditOpen={setEditOpen} />}
         {isAdmin && editOpen && <AdminPanel content={content} setContent={setContent} onClose={() => setEditOpen(false)} />}
       </div>
